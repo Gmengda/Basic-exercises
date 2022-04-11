@@ -1,0 +1,14 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int main() 
+{
+	int m, n,i;
+	scanf("%d %d", &i, &n);
+	while (m=i%n)
+	{
+		i = n;
+		n = m;
+	}
+	printf("最大公因数为：%d\n",n);
+	return 0;
+}
