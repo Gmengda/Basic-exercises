@@ -1,0 +1,18 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+void swap(int *a, int *b)               //特别注意！！
+{                                       //实参传给形参的时候
+	int c = 0;                            //形参就像实参的临时文件
+	c = *a;                               //对形参的修改是不会改变形参的
+	*a = *b;
+	*b = c;                               //但是运用指针，地址后就可以很好地进行利用。
+}
+int main()
+{
+	int q=20,w=10;
+	printf("%d %d\n", q, w);
+	swap(&q, &w);
+	printf("%d %d\n", q, w);
+	return 0;
+}
