@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main()
+{
+	char a[20] = { 0 };
+	                                                 //shutdown -s -t 60;关机程序   -s是设置关机    -a可以取消关机
+	system("shutdown -s -t 60");                     //system()  ;执行系统命令的
+	while (1)
+	{
+		printf("您的计算机将在1分钟内关机");
+		scanf("%s", a);
+		if (strcmp(a, "810833") == 0)                  //比较字符，输入密码中也体现出来；
+		{
+			system("shutdown -a");
+			break;
+		}
+	}
+	return 0;
+}
