@@ -1,0 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <iostream>
+
+using namespace std;
+int main()
+{
+	double r, s;
+	cin >> r;
+	s = 3.14*r*r;
+	cout << s << endl;
+	system("pause");
+	return 0;
+}
