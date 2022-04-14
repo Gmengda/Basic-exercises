@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+int Fibonacci(int n)
+{
+	int x = 1;
+	int y = 1;
+	int z = 1;
+	while (n > 2)
+	{
+		x = z + y;
+		z = y;
+		y = x;
+		n--;
+	}
+	return x;
+}
+
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int c = Fibonacci(n);
+	printf("%d", c);
+	return 0;
+}
