@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int binary_search(int m[], int k, int sz)
+{
+	int left = 0;
+	int right = sz - 1;
+	while (left <= right)
+	{
+		int a = (left + right) / 2;
+		if (m[a] < k)
+		{
+			left = a + 1;
+		}
+		else if (m[a] > k)
+		{
+			right = a - 1;
+		}
+		else
+		{
+			return a;
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	int m[] = {1,2,3,4,5,6,7,8,9,10};
+	int k=7;
+	int sz = sizeof(m) / sizeof(m[0]);
+	int ret = binary_search(m, k, sz);
+	if (ret == -1)
+	{
+		printf("没有");
+	}
+	else
+	{
+		printf("下标是%d\n", ret);
+	}
+	return 0;
+}
