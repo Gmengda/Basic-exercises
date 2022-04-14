@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+int lenn(char *n)
+{
+	int count = 0;
+	while(*n != '\0')
+	{
+		count++;
+		n++;
+	}
+	return count;
+}
+
+int main()
+{
+	char m[] = "wenshihetun";
+	int len = lenn(m);
+	printf("%d",len);
+	return 0;
+}
