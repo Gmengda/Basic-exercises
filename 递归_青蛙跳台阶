@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+int Frog(int n)
+{
+	if (n <= 1)
+	{
+		return 1;
+	}
+	else
+	{
+		return （Frog(n-1) + Frog(n-2)）% 1000000007;
+  }
+}
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	int c = Frog(n);
+	printf("%d", c);
+	return 0;
+}
