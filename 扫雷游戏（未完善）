@@ -1,0 +1,106 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include<time.h>
+#include<stdlib.h>
+#define ROW 5
+#define QUEUE 5
+
+//弄个雷~~
+int boom(char m[ROW][QUEUE], int row, int queue)
+{
+	int x = rand() % row;
+	int y = rand() % queue;
+	m[x][y] = '*';
+	return m[x][y];
+}
+
+//找雷！！！
+int searchboom(char m[ROW][QUEUE], int row, int queue,int x,int y)
+{
+	if (m[x - 1][y - 1] == '*')
+	{
+		printf("恭喜您扫到了雷，您拯救了世界");
+		return m[x-1][y-1];
+	}
+}
+
+
+//创造扫雷地图,输出地图
+void Creat_game(char m[ROW][QUEUE], int row, int queue,int x,int y)
+{
+	int i, j;
+	m[x-1][y-1] = '0';
+	for (i = 0; i < row; i++)
+	{
+		for (j = 0; j < queue; j++)
+		{
+			printf(" %c ", m[i][j]);
+			if(j<queue-1)
+			    printf("|");
+		}
+		printf("\n");
+		for (j = 0; j < queue; j++)
+		{
+			if (i < row - 1)
+				printf("——");
+		}
+		printf("\n");
+	}
+}
+
+//初始化数组
+void Init_game(char m[ROW][QUEUE], int row, int queue)
+{
+	int i,j;
+	for (i = 0; i < row; i++)
+	{
+		for (j = 0; j < queue; j++)
+		{
+			m[i][j] = ' ';
+		}
+	}
+}
+
+//菜单
+void mune()
+{
+	printf("###############################\n");
+	printf("1，玩一局扫雷       0，退出游戏\n");
+	printf("###############################\n");
+}
+
+//游戏执行
+void game()
+{
+	int x=0, y=0,i;
+	char v;
+	char m[ROW][QUEUE] = { 0 };
+	char n[ROW][QUEUE] = { 0 };
+	Init_game(m, ROW, QUEUE);
+	boom(m, ROW, QUEUE);
+	mune();
+	scanf("%d", &i);
+	while(i)
+	{
+		printf("请输入要寻找到坐标:");
+		scanf("%d%d", &x, &y);
+		v=searchboom(m, ROW, QUEUE,x,y);
+		if (v == '*')
+		{
+			break;
+		}
+		
+		Creat_game(n, ROW, QUEUE,x,y);
+	}
+	if (i == 0)
+	{
+		printf("欢迎下次光临~~\n");
+	}
+}
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+	game();
+	return 0;
+}
