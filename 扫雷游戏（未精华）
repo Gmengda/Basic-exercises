@@ -6,24 +6,51 @@
 #define QUEUE 5
 
 //弄个雷~~
-int boom(char m[ROW][QUEUE], int row, int queue)
+int boom(char m[ROW][QUEUE], int o,int p)
 {
-	int x = rand() % row;
-	int y = rand() % queue;
-	m[x][y] = '*';
-	return m[x][y];
+	m[o][p] = '*';
+	return m[o][p];
 }
 
 //找雷！！！
 int searchboom(char m[ROW][QUEUE], int row, int queue,int x,int y)
 {
-	if (m[x - 1][y - 1] == '*')
-	{
-		printf("恭喜您扫到了雷，您拯救了世界");
-		return m[x-1][y-1];
-	}
+		if (m[x - 1][y - 1] == '*')
+		{
+			printf("恭喜您扫到了雷，您拯救了世界");
+			return m[x - 1][y - 1];
+		}
 }
 
+//小提示！！！！！！！
+void Help(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x, int y,int o,int p)
+{
+		if (x-1 < o&&y-1 < p)
+		{
+			printf("雷在右下\n");
+		}
+		else if (x-1 > o&&y-1 < p)
+		{
+			printf("雷在左下\n");
+		}
+		else if (x-1 > o&&y-1 > p)
+		{
+			printf("雷在左上\n");
+		}
+		else if (x-1 < o&&y-1 > p)
+		{
+			printf("雷在右上\n");
+		}
+		else if (y-1 == p)
+		{
+			printf("雷在此行\n");
+		}
+		else if (x-1 == o)
+		{
+			printf("雷在此列\n");
+		}
+
+}
 
 //创造扫雷地图,输出地图
 void Creat_game(char m[ROW][QUEUE], int row, int queue,int x,int y)
@@ -72,14 +99,17 @@ void mune()
 //游戏执行
 void game()
 {
+	int o = rand() % ROW;
+	int p = rand() % QUEUE;
 	int x=0, y=0,i;
 	char v;
 	char m[ROW][QUEUE] = { 0 };
 	char n[ROW][QUEUE] = { 0 };
 	Init_game(m, ROW, QUEUE);
-	boom(m, ROW, QUEUE);
+	boom(m,o,p);
 	mune();
 	scanf("%d", &i);
+	Creat_game(m, ROW, QUEUE,x,y);
 	while(i)
 	{
 		printf("请输入要寻找到坐标:");
@@ -89,7 +119,10 @@ void game()
 		{
 			break;
 		}
-		
+		else
+		{
+			Help(m,n,ROW,QUEUE,x,y,o,p);
+		}
 		Creat_game(n, ROW, QUEUE,x,y);
 	}
 	if (i == 0)
