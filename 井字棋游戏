@@ -1,0 +1,204 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include<time.h>
+#include<stdlib.h>
+#define row 3
+#define queue 3
+
+int Flairs(char m[row][queue], int Row, int Queue)；
+void Initgame(char m[row][queue], int Row, int Queue)；
+void Printgame(char m[row][queue], int Row, int Queue)；
+void Playergame(char m[row][queue], int Row, int Queue)；
+void Computergame(char m[row][queue], int Row, int Queue)；
+int Victory(char m[row][queue], int Row, int Queue)；
+
+//判断是否为满
+int Flairs(char m[row][queue], int Row, int Queue)
+{
+	int i, j;
+	for (i = 0; i < Row; i++)
+	{
+		for (j = 0; j < Queue; j++)
+		{
+			if (m[i][j] == ' ')
+				return 0;
+		}
+	}
+	return 1;
+}
+
+//初始化
+void Initgame(char m[row][queue], int Row, int Queue)
+{
+	int i = 0;
+	for(i=0;i<Row;i++)
+	{
+		int j = 0;
+		for (j = 0; j < Queue; j ++ )
+		{
+			m[i][j] =  ' ' ;
+		} 
+	}
+}
+
+//打印棋盘
+void Printgame(char m[row][queue], int Row, int Queue)
+{
+	int i;
+	for (i = 0; i < Row; i++)
+	{
+		int j = 0;
+		for (j = 0; j < Queue; j++)
+		{
+			printf(" %c ", m[i][j]);
+			if (j < Queue - 1)
+				printf("|");
+		}
+		printf("\n");
+		j = 0;
+		for (j = 0; j < Queue; j++)
+		{
+			if (i < Row - 1)
+				printf("——");
+		}
+		printf("\n");
+	}
+}
+
+//玩家下棋
+void Playergame(char m[row][queue], int Row, int Queue)
+{
+	int x, y,i =1;
+	printf("请玩家下棋:\n");
+	while (i)
+	{
+		printf("请输入坐标:\n");
+		scanf("%d%d", &x, &y);
+		if (x >= 1 && x <= Row && y >= 1 && y <= Queue)
+		{
+			if (m[x-1][y-1] == ' ')
+			{
+				m[x - 1][y - 1] = '*';
+				i = 0;
+			}
+			else
+			{
+				printf("此点您已下过，请重新选择");
+			}
+		}
+		else
+		{
+			printf("请输入 1<x<%d , 1<y<%d \n", Row, Queue);
+		}
+	}
+}
+
+//电脑下棋
+void Computergame(char m[row][queue], int Row, int Queue)
+{
+	int x, y, i = 1;
+	printf("请电脑下棋\n");
+	while (i)
+	{
+		x = rand() % Row;
+		y = rand() % Queue;
+		if (m[x][y] == ' ')
+		{
+			m[x][y] = '#';
+			i = 0;
+		}
+	}
+}
+
+//判断胜负
+int Victory(char m[row][queue], int Row, int Queue)
+{
+	int i, j;
+	for (i = 0; i < Row; i++)
+	{
+		if (m[i][0] == m[i][1] && m[i][1]==m[i][2] && m[i][0] != ' ')
+		{
+			return m[i][1];
+		}
+	}
+	for (j = 0; j < Queue; j++)
+	{
+		if (m[0][j] == m[1][j] && m[1][j]==m[2][j] && m[0][j] != ' ')
+		{
+			return m[0][j];
+		}
+	}
+	if (m[2][2] == m[1][1]&& m[1][1] == m[0][0] && m[0][0] != ' ')
+		return m[1][1];
+	if (m[0][2] == m[1][1]&& m[1][1] == m[2][0] && m[0][2] != ' ')
+		return m[1][1];
+	if (int c = Flairs(m, Row, Queue) == 1)
+		return 'Q';
+	return 'N';
+}
+
+//菜单
+void mune()
+{
+	printf("###############################\n");
+	printf("1，玩一局三子棋       2，退出游戏\n");
+	printf("###############################\n");
+}
+
+//游戏执行
+void game()
+{
+	char n;
+	char m[row][queue] = {0};
+	Initgame(m, row, queue);
+	Printgame(m, row, queue);
+	while (1)
+	{
+		Playergame(m, row, queue);
+		Printgame(m, row, queue);
+		n = Victory(m, row, queue);
+		Computergame(m, row, queue);
+		Printgame(m, row, queue);
+		n = Victory(m, row, queue);
+		if (n != 'N')
+		{
+			break;
+		}
+	}
+	if (n == '*')
+	{
+		printf("玩家获胜\n");
+	}
+	else if (n == '#')
+	{
+		printf("电脑获胜\n");
+	}
+	else
+	{
+		printf("平局\n");
+	}
+}
+
+//测试
+void quizz()
+{
+	int i;
+	do
+	{
+		mune();
+		scanf("%d", &i);
+		switch (i)
+		{
+		case 1: game(); break;
+		case 2: printf("欢迎下次光临~"); i = 0; break;
+		case 3: printf("输入错误\n~"); break;
+		}
+	} while (i);
+}
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+	quizz();
+	return 0;
+}
