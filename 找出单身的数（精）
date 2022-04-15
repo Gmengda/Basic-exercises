@@ -1,0 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+int main()
+{
+	int i,j=0;
+	int a[] = { 1,2,3,4,1,2,3,4,5 };
+	int c = sizeof(a)/sizeof(0);
+	for (i = 0; i < c; i++)
+	{
+		j = j ^ a[i];                            //异或符号的运用
+	}
+	printf("%d", j);
+}
