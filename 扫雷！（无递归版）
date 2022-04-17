@@ -2,23 +2,26 @@
 #include <stdio.h>
 #include<time.h>
 #include<stdlib.h>
+#define Row 11
+#define Queue 11
 #define ROW 9
 #define QUEUE 9
 #define COUNT 10
 
-void playgame(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x[COUNT], int y[COUNT]);
-void Judgegame(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x, int y);
-void Initgame(char m[ROW][QUEUE], int row, int queue);
-void Printgame(char m[ROW][QUEUE], int row, int queue);
+void playgame(char m[Row][Queue], char n[Row][Queue], int row, int queue, int x[COUNT], int y[COUNT]);
+void Judgegame(char m[Row][Queue], char n[Row][Queue], int row, int queue, int x, int y);
+void Initgame(char m[Row][Queue], int row, int queue);
+void Printgame(char m[Row][Queue], int row, int queue);
 void game();
 void mune();
 void gamepage();
-int Countboom(char m[ROW][QUEUE], int row, int queue);
+int Countboom(char m[Row][Queue], int row, int queue);
+
 
 //有多少个雷
-int Countboom(char m[ROW][QUEUE], int row, int queue)
+int Countboom(char m[Row][Queue], int row, int queue)
 {
-	int i, j, c=0;
+	int i, j, c = 0;
 	for (i = 0; i < row; i++)
 	{
 		for (j = 0; j < queue; j++)
@@ -31,9 +34,9 @@ int Countboom(char m[ROW][QUEUE], int row, int queue)
 }
 
 //判断局势
-void Judgegame(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x, int y)
+void Judgegame(char m[Row][Queue], char n[Row][Queue], int row, int queue, int x, int y)
 {
-	int count=0;
+	int count = 0;
 	int i, j;
 	for (i = -1; i < 2; i++)
 	{
@@ -45,34 +48,42 @@ void Judgegame(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x
 			}
 		}
 	}
-	n[x][y]= 48+count;
+	n[x][y] = 48 + count;
 }
 //随机设置雷！
-void playgame(char m[ROW][QUEUE], char n[ROW][QUEUE], int row, int queue, int x[COUNT], int y[COUNT])
+void playgame(char m[Row][Queue], char n[Row][Queue], int row, int queue, int x[COUNT], int y[COUNT])
 {
 	int i, j;
+	int win=0;
 	while (1)
 	{
 		printf("请输入要扫的目标");
 		scanf("%d%d", &i, &j);
-		if (m[i-1][j-1] == '*')
+		if (m[i - 1][j - 1] == '*')
 		{
 			printf("您踩到了雷，您死了\n");
 			break;
 		}
-		else if(n[i-1][j-1] == '0')
+		else if (n[i - 1][j - 1] == '0')
 		{
 			printf("此点您已经下过，请从新输入：");
 		}
 		else
 		{
-			Judgegame(m,n,ROW,QUEUE,i-1,j-1);
+			Judgegame(m, n, ROW, QUEUE, i - 1, j - 1);
 		}
 		Printgame(n, ROW, QUEUE);
+		win++;
+		if (win == ROW*QUEUE-COUNT)
+		{
+			printf("恭喜您获得了胜利\n");
+			break;
+		}
+
 	}
 }
 //建立一个扫雷表
-void Initgame(char m[ROW][QUEUE], int row, int queue)
+void Initgame(char m[Row][Queue], int row, int queue)
 {
 	int i;
 	for (i = 0; i < row; i++)
@@ -86,7 +97,7 @@ void Initgame(char m[ROW][QUEUE], int row, int queue)
 }
 
 //输出扫雷表
-void Printgame(char m[ROW][QUEUE], int row, int queue)
+void Printgame(char m[Row][Queue], int row, int queue)
 {
 	int i, j;
 	for (i = 0; i < row; i++)
@@ -110,13 +121,13 @@ void Printgame(char m[ROW][QUEUE], int row, int queue)
 //游戏内容
 void game()
 {
-	int i,c;
+	int i, c;
 	int x[10] = { 0 };
 	int y[10] = { 0 };
-	char m[ROW][QUEUE] = { 0 };
-	char n[ROW][QUEUE] = { 0 };
-	Initgame(n, ROW, QUEUE);
-	Initgame(m, ROW, QUEUE);
+	char m[Row][Queue] = { 0 };
+	char n[Row][Queue] = { 0 };
+	Initgame(n, Row, Queue);
+	Initgame(m, Row, Queue);
 	for (i = 0; i < COUNT; i++)
 	{
 		x[i] = rand() % ROW;
@@ -126,7 +137,7 @@ void game()
 	c = Countboom(m, ROW, QUEUE);
 	printf("一共有%d个雷\n", c);
 	Printgame(m, ROW, QUEUE);
-	playgame(m, n, ROW, QUEUE, x, y);
+	playgame(m, n, Row, Queue, x, y);
 }
 
 //菜单
@@ -146,7 +157,7 @@ void gamepage()
 		mune();
 		printf("请输入数字");
 		scanf("%d", &i);
-		switch(i)
+		switch (i)
 		{
 		case 1:game(); break;
 		case 0:printf("欢迎下次光临~~\n"); break;
