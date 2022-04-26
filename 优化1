@@ -1,0 +1,66 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <assert.h>
+
+//6分    基本结构
+//void m_strcpy(char* m1,char* m2)
+//{
+//	while (*m2 != '\0')
+//	{
+//		*m1 = *m2;
+//		m1++;
+//		m2++;
+//	}
+//	*m1 = *m2;
+//}
+
+//7分	基本简化
+//void m_strcpy(char* m1, char* m2)
+//{
+//	while (*m1++ = *m2++);
+//}
+	
+//8分	考虑特定条件1	
+//void m_strcpy(char* m1, char* m2)
+//{
+//	assert(m1 != NULL);
+//	assert(m2 != NULL);
+//	while (*m1++ = *m2++);
+//}
+
+//9分	固定m2
+//void m_strcpy(char* m1,const char* m2)
+//{
+//	assert(m1 != NULL);
+//	assert(m2 != NULL);
+//	while (*m1++ = *m2++);
+//}
+
+//10分	char*
+char* m_strcpy(char* m1,const char* m2)
+{
+	char* m = m1;
+	assert(m1 != NULL);
+	assert(m2 != NULL);
+	while (*m1++ = *m2++);
+	return m;
+}
+
+//int main()
+//{
+//	char m1[] = "*********";
+//	char m2[] = "gmd";
+//	m_strcpy(m1, m2);
+//	printf("%s", m1);
+//	return 0;
+//}
+
+int main()
+{
+	char m1[] = "*********";
+	char m2[] = "gmd";
+	printf("%s", m_strcpy(m1, m2));
+	return 0;
+}
