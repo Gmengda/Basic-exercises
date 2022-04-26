@@ -1,0 +1,20 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+
+int main()
+{
+	int i;
+	int m[10] = { 1,2,3,4,5,6,7,8,9,100 };
+	for (i = 0; i <= 12; i++)    //当i等于12时   i的地址与m[12]的地址相同
+	{
+		printf("hehe\n");
+		m[i] = 0;
+	}
+	return 0;
+}
+1.栈默认的使用习惯：
+是从高到低储存，先用高的，后用低的。
+2.数组随着下标的增长
+地址是由低到高变化的
