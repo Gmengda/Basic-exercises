@@ -1,0 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <assert.h>
+
+int main()
+{
+	unsigned int i;
+	for(i=9;i>=0;i--)     //i==-1时
+		printf("%u\n", i);  //-1是一个超大的数
+	return 0;
+}
