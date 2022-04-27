@@ -1,0 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <assert.h>
+
+int main()
+{
+	unsigned char a = 0;
+	for (a = 0; a <= 255; a++)
+		printf("hehe");
+	return 0;
+}
