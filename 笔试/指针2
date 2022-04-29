@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+int main()
+{	
+	(*(void(*)())0)();
+	//吧0强制转换成void(*)()类型，让0变成一个函数地址
+	//调用0地址处该函数
+
+	void(*signal(int, void(*)(int)))(int);
+	//signal是一个函数声明
+	//两个参数，一个是int，一个是函数指针（指向参数int，返回类型void）
+	//signal函数的返回类型也是一个函数指针，函数指针的参函数是int，返回类型void
+	//简化后
+	typedef void(*MMMMM)(int);
+	MMMMM signal(int, MMMMM);
+	//参考
+	typedef void(*MMMMM)(int);   //正确
+	typedef void(*)(int) MMMMM;  //错误
+
+	typedef unsigned int uint;
+
+	return 0;
+}
