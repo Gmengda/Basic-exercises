@@ -1,0 +1,14 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+int main()
+{	
+	int i;
+	char a[12];
+	scanf("%[^\n]", &a);
+	for (i = 9; i >= 0; i--)
+	{
+		printf("%c", a[i]);
+	}
+	return 0;
+}
