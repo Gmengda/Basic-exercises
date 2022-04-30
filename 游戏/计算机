@@ -33,7 +33,7 @@ int div(int x, int y)
 int main()
 {
 	int a, b, c;
-	int (*uuu[5])(int, int) = { add,sub,mul,div };
+	int (*uuu[])(int, int) = { add,sub,mul,div };
 	do
 	{
 		mune();
