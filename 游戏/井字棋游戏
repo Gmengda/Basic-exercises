@@ -191,7 +191,7 @@ void quizz()
 		{
 		case 1: game(); break;
 		case 2: printf("欢迎下次光临~"); i = 0; break;
-		case 3: printf("输入错误\n~"); break;
+		case 3: printf("输入错误\n~");
 		}
 	} while (i);
 }
