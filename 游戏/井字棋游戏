@@ -5,27 +5,11 @@
 #define row 3
 #define queue 3
 
-int Flairs(char m[row][queue], int Row, int Queue)；
 void Initgame(char m[row][queue], int Row, int Queue)；
 void Printgame(char m[row][queue], int Row, int Queue)；
 void Playergame(char m[row][queue], int Row, int Queue)；
 void Computergame(char m[row][queue], int Row, int Queue)；
 int Victory(char m[row][queue], int Row, int Queue)；
-
-//判断是否为满
-int Flairs(char m[row][queue], int Row, int Queue)
-{
-	int i, j;
-	for (i = 0; i < Row; i++)
-	{
-		for (j = 0; j < Queue; j++)
-		{
-			if (m[i][j] == ' ')
-				return 0;
-		}
-	}
-	return 1;
-}
 
 //初始化
 void Initgame(char m[row][queue], int Row, int Queue)
