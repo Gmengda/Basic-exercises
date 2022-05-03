@@ -1,0 +1,18 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+
+int main()
+{
+	const char *p = "abcdef";
+
+	printf("%d\n", sizeof(p));//4/8 - 指针变量的大小
+	printf("%d\n", sizeof(p + 1));//4/8 - 字符b的地址
+	printf("%d\n", sizeof(*p));//1 - *p就是第一个字符'a'
+	printf("%d\n", sizeof(p[0]));//1 - p[0] == *(p + 0) == 'a'
+	printf("%d\n", sizeof(&p));//4/8 - p的地址
+	printf("%d\n", sizeof(&p + 1));//4/8 - p的地址
+	printf("%d\n", sizeof(&p[0] + 1));//1
+	return 0;
+}
