@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+void left_move(char arr[], int n)
+{
+	int i;
+	int len = strlen(arr);
+	for (i = 0; i < n; i++)
+	{
+		char tmp = *arr;
+		int j = 0;
+		for (j = 0; j < len - 1; j++)
+		{
+			*(arr + j) = *(arr + j + 1);
+		}
+		*(arr + len - 1) = tmp;
+	}
+}
+
+int main()
+{
+	int n;
+	char arr[] = "abcdef";
+	scanf("%d", &n);
+	left_move(arr, n);
+	printf("%s\n", arr);
+	return 0;
+}
