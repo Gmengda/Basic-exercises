@@ -1,0 +1,22 @@
+ #define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+struct Stu
+{
+	char name[20];//名字
+	char tele[12];//电话
+	char sex[10];//性别
+	int age;
+} s4,s5,s6;
+
+struct Stu s3;//全局变量
+
+int main()
+{
+	//创建的结构体变量
+	struct Stu s1;
+	struct Stu s2;
+
+	return 0;
+}
