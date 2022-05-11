@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include    <stdio.h>
+#include    <string.h>
+#define    M    5
+#define    N    20
+void fun(char(*ss)[N])
+{
+	int  i, j, k = 0, n, m, len;
+	for (i = 0; i < M; i++)
+	{
+		len = strlen(ss[i]);
+		if (i == 0) n = len;
+		if (len > n) {
+			/**********found**********/
+			n = len;    k = i;
+		}
+	}
+	for (i = 0; i < M; i++)
+		if (i != k)
+		{
+			m = n;
+			len = strlen(ss[i]);
+			/**********found**********/
+			for (j = len; j >= 0; j--)
+				ss[i][m--] = ss[i][j];
+			for (j = 0; j < n - len; j++)
+				/**********found**********/
+				ss[i][j] = '*';
+		}
+}
+int main()
+{
+	char  ss[M][N] = { "shanghai","guangzhou","beijing","tianjing","cchongqing" };
+	int  i;
+	printf("\nThe original strings are :\n");
+	for (i = 0; i < M; i++)  printf("%s\n", ss[i]);
+	printf("\n");
+	fun(ss);
+	printf("\nThe result:\n");
+	for (i = 0; i < M; i++)  printf("%s\n", ss[i]);
+}
