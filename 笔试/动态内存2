@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+char* GetMemory()
+{
+	char p[] = "hello world";
+	return p;
+}
+
+void Test(void)
+{
+	char*str = NULL;
+	str = GetMemory();
+	printf(str);
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
+
+//内存存放问题
+改正后
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+char* GetMemory()
+{
+	static char p[] = "hello world"; //////栈区转向堆区
+	return p;
+}
+
+void Test(void)
+{
+	char*str = NULL;
+	str = GetMemory();
+	printf(str);
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
