@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+void GetMemory(char **p, int num)
+{
+	*p = (char *)malloc(num);
+}
+
+void Test()
+{
+	char* str = NULL;
+	GetMemory(&str, 100);
+	strcpy(str, "hello");
+	printf(str);
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
+
+//没有什么大问题
+//忘记释放，导致内存泄露
+改正后
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+void GetMemory(char **p, int num)
+{
+	*p = (char *)malloc(num);
+}
+
+void Test()
+{
+	char* str = NULL;
+	GetMemory(&str, 100);
+	strcpy(str, "hello");
+	printf(str);
+  free(str);
+  str = NULL;
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
