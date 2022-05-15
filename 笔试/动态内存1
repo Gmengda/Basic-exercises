@@ -1,0 +1,55 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+void GetMemory(char* p)
+{
+	p = (char*)malloc(100);//传值过来并没有改变Str的值，无法找到。而且也没有释放，就形成了内存泄漏
+}
+
+void Test(void)
+{
+	char*str = NULL;
+	GetMemory(str);//传值
+	strcpy(str, "hellow world");//程序崩溃，访问非法内存
+	printf(str);
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
+//运行代码程序会崩溃
+//内存泄漏
+改正后
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <windows.h>
+
+void GetMemory(char** p)
+{
+	*p = (char*)malloc(100);
+}
+
+void Test(void)
+{
+	char*str = NULL;
+	GetMemory(&str);
+	strcpy(str, "hellow world");
+	printf(str);
+	free(str);
+	str = NULL;
+}
+
+int main()
+{
+	Test();
+	return 0;
+}
