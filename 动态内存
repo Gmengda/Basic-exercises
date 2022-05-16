@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+
+int main()
+{
+	//申请10个空间
+	int* p = (int*)malloc(10 * sizeof(int));
+	if (p == NULL)
+	{
+		//打印错误的方式
+		printf("%s\n", strerror(errno));
+	}
+	else
+	{
+		int i = 0;
+		for (i = 0; i < 10; i++)
+		{
+			*(p + i) = i;
+		}
+		for (i = 0; i < 10; i++)
+		{
+			printf("%d  \n",*(p + i));
+		}
+	}
+	return 0;
+}
