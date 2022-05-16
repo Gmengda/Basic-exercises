@@ -1,0 +1,42 @@
+typedef struct s
+{
+	int i;
+	int* a;//柔性数组成员
+};
+
+int main()
+{
+	struct s* ps = (struct s*)malloc(sizeof(struct s));
+	ps->a =(int *)malloc(5*sizeof(int));
+
+	int n = 0;
+	for (n = 0; n < 5; n++)
+	{
+		ps->a[n] = n;
+	}
+	for (n = 0; n < 5; n++)
+	{
+		printf("%d ", ps->a[n]);
+	}
+	//调整大小
+	
+	int *ptr = (int*)realloc(ps->a, 10 * sizeof(int));
+	if (ptr != NULL)
+	{
+		ps->a = ptr;
+	}
+	for (n = 0; n < 10; n++)
+	{
+		ps->a[n] = n;
+	}
+	for (n = 0; n < 10; n++)
+	{
+		printf("%d ", ps->a[n]);
+	}
+	//释放内存
+	free(ps->a);
+	ps->a = NULL;
+	free(ps);
+	ps = NULL;
+	return 0;
+}
