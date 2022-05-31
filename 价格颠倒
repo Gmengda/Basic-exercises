@@ -1,0 +1,36 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+int main()
+{
+	int i;
+	int a[4] = { 0 };
+	int s;
+	scanf("%d", &s);
+	if (s % 10 == 0)
+	{
+		printf("不行呦.");
+		return 0;
+	}
+	else
+		for (i = 0; i < 4; i++)
+		{
+			a[i] = s % 10;
+			s = s / 10;
+		}
+	for (i = 0; i < 4; i++)
+	{
+		if (a[i] == 6)
+		{
+			a[i] = 9;
+			continue;
+		}
+		if (a[i] == 9)
+		{
+			a[i] = 6;
+			continue;
+		}
+	}
+	printf("%d%d%d%d", a[0], a[1], a[2], a[3]);
+	return 0;
+}
