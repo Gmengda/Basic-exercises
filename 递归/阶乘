@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+int add(int);
+
+int main()
+{
+    int a, c;
+    scanf("%d", &a);
+    c = add(a);
+    printf("%d", c);
+    return 0;
+}
+
+int add(int x)
+{
+    int n;
+    n = x;
+    if (n == 1)
+    {
+        return x;
+    }
+    else if(n<=0)
+    {
+        printf("此数没有阶乘");
+    }
+    else
+    {
+        x *= add(x-1);
+    }
+    return x;
+}
